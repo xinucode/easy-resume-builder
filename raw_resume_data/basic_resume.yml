@@ -1,0 +1,20 @@
+- Latex Resume:
+    style_info:
+      section_header: #sets basic style
+        font: Barrbar #use font name downloaded into "fonts" folder or "default"
+        size: 15 #pt
+        color: black #color of text
+        modifiers: [i,b] #i = italics, b=bold
+      # position_title: #same format as section header
+        # ...
+      # links: 
+        # ...
+      # name: 
+        # ...
+    header_info: #doesn't work yet (supposed to set the order of the info)
+    - homepage
+    - email
+    - github
+    - linkedin
+    - gscholar
+- Latex Resume #with all default settings

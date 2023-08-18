@@ -1,0 +1,132 @@
+Name: Sarah Skinner
+Position: Graduate Student
+# Objective: Study physics ig.
+Contact:
+    # - email: sarahski@andrew.cmu.edu
+    - location: Pittsburgh, PA
+    # - mobile: (417)298-6783
+    # - orcid: 0000-0003-4326-9643
+    
+Websites:
+    - name: Personal Website
+      link: xinucode.github.io
+      image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/MeLogo3-white-outline.png
+      latex_header_id: homepage
+    - name: Google Scholar
+      image: https://images.squarespace-cdn.com/content/v1/5ba52747b2cf7962631f77ea/1539100551186-N2P386SVISRATZ5IUWT8/ke17ZwdGBToddI8pDm48kEBW7z-dDW5qDFwbZpebXfp7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UUXw44irD28DkWYx3-1dwLa4g0PDx-AhloRAoRgIe7QLG6v6ULRah83RgHXAWD5lbQ/Ankur_google+scholar+icon_blue-01.png
+      latex_header_id: gscholar
+      link: qrd.by/sss
+    - name: GitHub
+      image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/github.png
+      link: xinucode
+      latex_header_id: github
+    - name: LinkIn
+      image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/linkedin.png
+      link: sarah-s-144b8717a
+      latex_header_id: linkedin
+    - name: Upwork
+      image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/upwork-icon.png
+      link: https://www.upwork.com/freelancers/~01a120b13dd5d61cae
+      
+Education:
+    - name: Carnegie Mellon University
+      abbreviation: CMU
+      dates: Aug 2020 - Aug 2024
+      degree: Ph.D. in Physics
+      gpa: 3.8/4.3
+      location: Pittsburgh, PA
+    - name: Missouri University of Science and Technology
+      abbreviation: Missouri S&T
+      dates: June 2016 - Dec 2019
+      degree: B.S. Physics
+      gpa: 3.9/4.0
+      minors:
+      - Computer Science
+      - Mathematics
+      location: Rolla, MO
+Computer Skills:
+    - C++
+    - Python
+    - LaTeX
+    - Fortran
+    - Mathematica
+    - MPI
+    - OpenMP
+    - Linux
+    - Windows
+    - Microsoft Office
+Publications:
+    bibfile: "raw_resume_data/publications.bib"
+    list:
+      - BULAVA2023116105
+      - PhysRevE.102.032108
+      - PhysRevE.100.042142
+      - Nicola_2020
+Research Projects:
+    - name: Calculating Resonance Information from Lattice QCD
+      dates: Jan 2021 - Present
+      summary: Investigation into how resonances impact the scattering of hadrons.
+      institution: Carnegie Mellon University
+      abbreviation: CMU
+      location: Pittsburgh, PA
+      advisor: Dr. Colin Morningstar
+    - name: Analysis on GlueX Data
+      dates: Aug 2020 - Dec 2020
+      institution: Carnegie Mellon University
+      summary: Isolated scattering channels in Gluex detector data.
+      abbreviation: CMU
+      location: Pittsburgh, PA
+      advisor: Dr. Curtis Meyer
+    - name: Scalability Improvement of Plasma Simulation
+      dates: Jan 2020 - May 2020
+      institution: NASA Glenn
+      summary: Improved methods within a hybrid fluid/Monte Carlo plasma simulation in confined geometries to predict physics in an ion thruster.
+      location: Cleveland, OH
+      advisor: Dr. Maria Choi
+    - name: Anomalous Diffusion in Confined Geometries
+      dates: Jan 2018 - Dec 2019
+      institution: Missouri University of Science and Technology
+      abbreviation: Missouri S&T
+      summary: Modeled anomalous diffusion determined by the fractional Langevin equation using Monte Carlo methods.
+      advisor: Dr. Thomas Vojta
+      location: Rolla, MO
+    - name: Errors in Dark Matter Halos Fit Model
+      dates: Jun 2019 - Aug 2019
+      institution: Brookhaven National Laboratories
+      summary: Inserted error into dark matter fit model to assess its significance.
+      location: Upton, NY
+      advisor: Dr. Anže Slosar
+    - name: Binary Black Hole Model
+      dates: May 2018 - Jul 2018
+      institution: Louisiana State University
+      summary: Added rotation parameter for smaller black hole in binary system with a high mass difference.
+      location: Baton Rouge, LA
+      advisor: Dr. Peter Diener
+      
+Conferences:
+    - name: Lattice Conference 2023
+      date: August 2023
+      location: Fermilab, IL
+    - name: American Physical Society Topical Group on Hadronic Physics Meeting
+      date: April 2023
+      location: Minneapolis, MI
+    # - name: American Physical Society April Meeting
+      # date: April 2023
+      # location: Minneapolis, MI
+    - name: American Physical Society March Meeting
+      date: Mar 2019
+      location: Boston, MA
+    # - name: Conference for Undergraduate Women in Physics
+      # date: Jan 2019
+      # location: Corpus Christi, TX
+
+Workshops:
+    - name: National Nuclear Physics Summer School
+      date: July 2023
+      location: Riverside, CA
+    - name: Hampton University Graduate Studies (HUGS) Program (Jefferson Lab)
+      date: June 2022
+      location: Newport News, VA
+    - name: International HPC Summer School on Challenges in Computational Sciences
+      date: June 2022
+      location: Athens, Greece
