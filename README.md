@@ -16,17 +16,19 @@ Example
 Name: Sarah Skinner
 Position: Graduate Student #optional
 Objective: Study physics ig. #optional
-Contact: #optional
-    - email: sarahski@andrew.cmu.edu #optional
+Contact: #optional (need at least one entry)
+    - email: me@mail.com #optional
     - location: Pittsburgh, PA #optional
-    - mobile: (417)298-6783 #optional
+    - mobile: (123)456-7890 #optional
     - orcid: 0000-0003-4326-9643 #optional
     ...
 Websites: #optional
     - name: Personal Website
       link: xinucode.github.io
       image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/MeLogo3-white-outline.png #optional
-      latex_header_id: homepage #optional
+      latex_header_id: homepage #optional, latex_header_id's include:
+			# "homepage","github","linkedin","gitlab","stackoverflow","twitter",
+			# "skype","reddit", "researchgate","gscholar", "extrainfo"
     ...
 Education: #optional
     - name: Missouri University of Science and Technology
@@ -71,13 +73,48 @@ Workshops: #optional
 ```
 
 ## Resume Format Config
-Example:
+Example #1:
 ```
-- Latex Resume
+- Latex Resume #applies all defaults
+```
+This example creates a latex resume with all defaults given. It inserts all the given information into the resume.
+
+Example #2:
+```
 - Latex Resume:
-  header_info:  #optional
+    name: skinner_cv #optional, specifies name for build directory
+    style_info: #optional, specifies style of certain entities
+      skills: #optional, sets style of skill list
+        font: default #use font name downloaded into "fonts" folder 
+							#or "default" or "sourcesanspro"
+        size: 15 #(pt)
+        color: green #color of text
+        modifiers: [i,b] #i = italics, b=bold, s=scshape
+      position_title: #optional, same format as skills
+		...
+      # other elements that can be styled include: name, links, section_header
+		#footer, bibliography, entry_title, entry_position, entry_date, entry_location
+    header_list: #optional, specifies which items to include in info list and in
+					#what order
     - homepage
     - email
-    ...
+    - github
+    - linkedin
+    - gscholar
+    section_list: #optional, specifies which items to include in section list
+					# and in what order (if no info for section is given, then 
+					# it's not included
+    - Objective
+    - Education
+    - Publications
+    - Research Projects
+    - Computer Skills
+    - Conferences
+    - Workshops
+    - Conferences and Workshops #if includes, "Conferences" and "Workshops" sections
+									#are omitted
+    - Invited Talks
 ...
 ```
+This example specifies more of the formatting and ordering of the document. If sections/item are to be excluded,
+create a list of all items to include and omit the excluded items. Multiple resumes can be formatted in one file.

@@ -170,15 +170,7 @@
 % Set the FontAwesome font to be up-to-date.
 %这里被我修改了\newfontfamily\FA[Path=\@fontdir]{FontAwesome}
 % Set font for header (default is Roboto)
-\newfontfamily\headerfont[
-  Path=\@fontdir,
-  UprightFont=*-Regular,
-  PositionTitleFontItalicFont=*-Italic,
-  PositionTitleFontBoldFont=*-Bold,
-  PositionTitleFontBoldItalicFont=*-BoldItalic,
-]{PositionTitleFont}
-
-\newfontfamily\namefont[
+\newfontfamily\Namefont[
   Path=\@fontdir,
   UprightFont=*-Regular,
   NameFontItalicFont=*-Italic,
@@ -186,7 +178,15 @@
   NameFontBoldItalicFont=*-BoldItalic,
 ]{NameFont}
 
-\newfontfamily\headerlinkfont[
+\newfontfamily\PositionTitlefont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  PositionTitleFontItalicFont=*-Italic,
+  PositionTitleFontBoldFont=*-Bold,
+  PositionTitleFontBoldItalicFont=*-BoldItalic,
+]{PositionTitleFont}
+
+\newfontfamily\Linksfont[
   Path=\@fontdir,
   UprightFont=*-Regular,
   LinksFontItalicFont=*-Italic,
@@ -202,7 +202,78 @@
   SectionFontBoldItalicFont=*-BoldItalic,
 ]{SectionFont}
 
-%]{PlayfairDisplay}%
+\newfontfamily\Footerfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  FooterFontItalicFont=*-Italic,
+  FooterFontBoldFont=*-Bold,
+  FooterFontBoldItalicFont=*-BoldItalic,
+]{FooterFont}
+
+\newfontfamily\Subsectionfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  SubsectionFontItalicFont=*-Italic,
+  SubsectionFontBoldFont=*-Bold,
+  SubsectionFontBoldItalicFont=*-BoldItalic,
+]{SubsectionFont}
+
+\newfontfamily\Paragraphfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  ParagraphFontItalicFont=*-Italic,
+  ParagraphFontBoldFont=*-Bold,
+  ParagraphFontBoldItalicFont=*-BoldItalic,
+]{ParagraphFont}
+
+\newfontfamily\Bibfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  BibFontItalicFont=*-Italic,
+  BibFontBoldFont=*-Bold,
+  BibFontBoldItalicFont=*-BoldItalic,
+]{BibFont}
+
+\newfontfamily\EntryTitlefont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  EntryTitleFontItalicFont=*-Italic,
+  EntryTitleFontBoldFont=*-Bold,
+  EntryTitleFontBoldItalicFont=*-BoldItalic,
+]{EntryTitleFont}
+
+\newfontfamily\EntryPositionfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  EntryPositionFontItalicFont=*-Italic,
+  EntryPositionFontBoldFont=*-Bold,
+  EntryPositionFontBoldItalicFont=*-BoldItalic,
+]{EntryPositionFont}
+
+\newfontfamily\EntryDatefont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  EntryDateFontItalicFont=*-Italic,
+  EntryDateFontBoldFont=*-Bold,
+  EntryDateFontBoldItalicFont=*-BoldItalic,
+]{EntryDateFont}
+
+\newfontfamily\EntryLocationfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  EntryLocationFontItalicFont=*-Italic,
+  EntryLocationFontBoldFont=*-Bold,
+  EntryLocationFontBoldItalicFont=*-BoldItalic,
+]{EntryLocationFont}
+
+\newfontfamily\Skillsetfont[
+  Path=\@fontdir,
+  UprightFont=*-Regular,
+  SkillsetFontItalicFont=*-Italic,
+  SkillsetFontBoldFont=*-Bold,
+  SkillsetFontBoldItalicFont=*-BoldItalic,
+]{SkillsetFont}
+
 
 \newcommand*{\footerfont}{\sourcesanspro}%
 \newcommand*{\bodyfont}{\rm}%\sourcesanspro
@@ -213,23 +284,24 @@
 %-------------------------------------------------------------------------------
 % Configure styles for each CV elements
 % For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{FirstNameFontSize}{1em}\namefontFirstNameFontBoldFirstNameFontItalics\color{FirstNameFontColor} #1}} %
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{LastNameFontSize}{1em}\namefontLastNameFontBoldLastNameFontItalics\color{LastNameFontColor} #1}}
-\newcommand*{\headerpositionstyle}[1]{{\fontsize{PositionTitleFontSize}{1em}\headerfontPositionTitleFontBoldPositionTitleFontItalics\color{PositionTitleFontColor} #1}}
-\newcommand*{\headeraddressstyle}[1]{{\fontsize{LinksFontSize}{1em}\headerlinkfontLinksFontBoldLinksFontItalics\color{LinksFontColor} #1}} 
-\newcommand*{\headersocialstyle}[1]{{\fontsize{LinksFontSize}{1em}\headerlinkfontLinksFontBoldLinksFontItalics\color{LinksFontColor} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
-\newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{SectionFontSize}{1em}SectionFontTagSectionFontBoldSectionFontItalics\color{SectionFontColor} #1}} %
-\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\textcolor{text}{#1}}} %\scshape
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfont\upshape\color{text}} %
-\newcommand*{\thisbibstyle}{\fontsize{10pt}{1em}\bodyfont\color{graytext}} %
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{FirstNameFontSize}{1em}NameFontTagFirstNameFontBoldFirstNameFontItalicsFirstNameFontSC\color{FirstNameFontColor} #1}} %
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{LastNameFontSize}{1em}NameFontTagLastNameFontBoldLastNameFontItalicsLastNameFontSC\color{LastNameFontColor} #1}}
+\newcommand*{\headerpositionstyle}[1]{{\fontsize{PositionTitleFontSize}{1em}PositionTitleFontTagPositionTitleFontBoldPositionTitleFontItalicsPositionTitleFontSC\color{PositionTitleFontColor} #1}}
+\newcommand*{\headeraddressstyle}[1]{{\fontsize{LinksFontSize}{1em}LinksFontTagLinksFontBoldLinksFontItalicsLinksFontSC\color{LinksFontColor} #1}} 
+\newcommand*{\headersocialstyle}[1]{{\fontsize{LinksFontSize}{1em}LinksFontTagLinksFontBoldLinksFontItalicsLinksFontSC\color{LinksFontColor} #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{SectionFontSize}{1em}SectionFontTagSectionFontBoldSectionFontItalicsSectionFontSC\color{SectionFontColor} #1}} 
+\newcommand*{\footerstyle}[1]{{\fontsize{FooterFontSize}{1em}FooterFontTagFooterFontBoldFooterFontItalicsFooterFontSC\color{FooterFontColor} #1}} 
+\newcommand*{\subsectionstyle}[1]{{\fontsize{SubsectionFontSize}{1em}SubsectionFontTagSubsectionFontBoldSubsectionFontItalicsSubsectionFontSC\color{SubsectionFontColor} #1}} 
+\newcommand*{\paragraphstyle}[1]{{\fontsize{ParagraphFontSize}{1em}ParagraphFontTagParagraphFontBoldParagraphFontItalicsParagraphFontSC\color{ParagraphFontColor} #1}} 
+\newcommand*{\thisbibstyle}[1]{{\fontsize{BibFontSize}{1em}BibFontTagBibFontBoldBibFontItalicsBibFontSC\color{BibFontColor} #1}}
 
-% For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{8pt}{1em}\bodyfont\color{graytext} #1}}%\scshape
-\newcommand*{\entrydatestyle}[1]{{\fontsize{8pt}{1em}\bodyfontlight\slshape\color{graytext} #1}}%
-\newcommand*{\entrylocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{text} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
+
+% For elements of entry 
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{EntryTitleFontSize}{1em}EntryTitleFontTagEntryTitleFontBoldEntryTitleFontItalicsEntryTitleFontSC\color{EntryTitleFontColor} #1}} 
+\newcommand*{\entrypositionstyle}[1]{{\fontsize{EntryPositionFontSize}{1em}EntryPositionFontTagEntryPositionFontBoldEntryPositionFontItalicsEntryPositionFontSC\color{EntryPositionFontColor} #1}} 
+\newcommand*{\entrydatestyle}[1]{{\fontsize{EntryDateFontSize}{1em}EntryDateFontTagEntryDateFontBoldEntryDateFontItalicsEntryDateFontSC\color{EntryDateFontColor} #1}} 
+\newcommand*{\entrylocationstyle}[1]{{\fontsize{EntryLocationFontSize}{1em}EntryLocationFontTagEntryLocationFontBoldEntryLocationFontItalicsEntryLocationFontSC\color{EntryLocationFontColor} #1}} 
 \newcommand*{\descriptionstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text} #1}} %
 
 % For elements of subentry
@@ -246,8 +318,8 @@
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\slshape\color{texts} #1}}
 
 % For elements of skill
+\newcommand*{\skillsetstyle}[1]{{\fontsize{SkillsetFontSize}{1em}SkillsetFontTagSkillsetFontBoldSkillsetFontItalicsSkillsetFontSC\color{SkillsetFontColor} #1}} 
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 %%% For elements of CV Tags
 %\newcommand*{\cvtag}[1]{%

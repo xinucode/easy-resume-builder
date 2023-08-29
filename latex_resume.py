@@ -13,7 +13,7 @@ class HeaderInfo:
         self.name = name
         self.position = args.pop("position",r"\ ")
         self.info_sort = args.pop(
-            "header_info",
+            "header_list",
             [
                 "mobile",
                 "email",
@@ -61,9 +61,9 @@ class HeaderInfo:
     def export_info(self, document):
         document.preamble.append(pylatex.Command('name', [pylatex.NoEscape(item) for item in self.name.split(" ")] ))
         document.preamble.append(pylatex.Command('position', pylatex.NoEscape(self.position) ))
-        for item in self.info.keys():
+        for item in self.info_sort:
             if self.info[item] is not None:
-                document.preamble.append(pylatex.Command(item, self.info[item] ))
+                document.preamble.append(pylatex.Command(item, pylatex.NoEscape(self.info[item]) ))
         
         
 
@@ -73,7 +73,7 @@ def vspace( doc, amount = "-3.5mm"):
         
 class LatexResume:
     sections = ["Objective", "Education", "Publications", "Research Projects", "Technical Skills", "Computer Skills", 
-                "Conferences","Workshops", "Volunteer Services", "References", "Conferences and Workshops"]
+                "Conferences","Workshops", "Conferences and Workshops", "Invited Talks", "Volunteer Services", "References"]
     # sub_dir = "latex_build"
 	
     def __init__( self, resume_info, resume_format, index ):
@@ -84,7 +84,8 @@ class LatexResume:
             self.resume_format = {}
         self.index = index
         
-        print(resume_format)
+        self.sections = self.resume_format.pop("section_list",self.sections)
+        self.name = self.resume_format.pop("name","")
         
         if not os.path.exists( self.sub_dir ):
             os.mkdir( self.sub_dir )
@@ -93,6 +94,8 @@ class LatexResume:
         
     @property
     def sub_dir( self ):
+        if self.name:
+            return f"{self.name}_{self.index}"
         return f"latex_build_{self.index}"
         
     @property
@@ -119,12 +122,13 @@ class LatexResume:
             doc.append(pylatex.Command('medskip'))
         doc.append(pylatex.Command('begin',"cventries"))
         if section=="Objective":
-            vspace(doc)
+            # vspace(doc)
+            doc.append(pylatex.NoEscape("\n"))
             doc.append(pylatex.Command('cventry', [pylatex.NoEscape(item) for item in ["\ ",self.resume_info.objective,"\ ","\ ","\ "]]))
-            doc.append(pylatex.Command('vspace',pylatex.NoEscape("-3.5mm"))) #make vspace input
+            vspace(doc) #make vspace input
             # doc.append(pylatex.Command('vspace',pylatex.NoEscape("-3.5mm")))
         elif section=="Education":
-            # vspace(doc)
+            vspace(doc,"1mm")
             doc.append(pylatex.NoEscape("\n"))
             for ed in self.resume_info.education:
                 extra = ""
@@ -139,6 +143,7 @@ class LatexResume:
         elif section=="Computer Skills":
             # vspace(doc)
             doc.append(pylatex.NoEscape("\n"))
+            doc.append(pylatex.NoEscape("\skillsetstyle{"))
             with doc.create(pylatex.Tabularx(5*'X')) as table:
                 skills = self.resume_info.all_other_info[section]
                 grouped_skills = [skills[n:n+5] for n in range(0, len(skills), 5)]
@@ -149,6 +154,7 @@ class LatexResume:
                     if len(group)<5:
                         group = group+[pylatex.NoEscape("\ ")]*(5-len(group))
                     table.add_row( group )
+            doc.append(pylatex.NoEscape("}"))
             doc.append(pylatex.Command('bigskip'))
         elif section=="Publications":
             # vspace(doc)
@@ -156,15 +162,17 @@ class LatexResume:
             shutil.copy( bibfile, self.sub_dir )
             for item in self.resume_info.all_other_info[section]['list']:
                 doc.append(pylatex.Command('nocite',pylatex.NoEscape(item)))
-            doc.append(pylatex.Command('footnotesize'))
-            doc.append(pylatex.Command('bibliography',"publications"))
+            # doc.append(pylatex.Command('footnotesize'))
+            doc.append(pylatex.Command('thisbibstyle',pylatex.Command('bibliography',"publications")))
+            # doc.append()
             doc.append(pylatex.Command('normalsize'))
         elif section=="Research Projects":
             doc.append(pylatex.NoEscape("\n"))
             for res in self.resume_info.research:
-                doc.append(pylatex.Command('cventry', [ pylatex.NoEscape("Advisor: "+pylatex.utils.italic(res.advisor)+". "+res.summary),str(res),res.location,res.dates,pylatex.NoEscape("\ ")]))
+                doc.append(pylatex.Command('cventry', [ pylatex.NoEscape("Advisor: "+pylatex.utils.italic(pylatex.NoEscape(res.advisor))+". "+res.summary),str(res),res.location,res.dates,pylatex.NoEscape("\ ")]))
                 vspace(doc)
-        elif section=="Conferences" or section=="Workshops" or section=="Conferences and Workshops":
+        elif section=="Conferences" or section=="Workshops" or section=="Conferences and Workshops" or section=="Invited Talks":
+            # vspace(doc,"2mm")
             doc.append(pylatex.NoEscape("\n"))
             for item in self.resume_info.all_other_info[section]:
                 doc.append(pylatex.Command('cventry', ["",item['name'],f"{item['location']}, {item['date']}","",""]))
@@ -194,9 +202,12 @@ class LatexResume:
         fn_font_color = title_font_color
         fn_modifiers = title_modifiers
         
-        if title_font=="default":
-            file_contents = file_contents.replace(f"{item_tag}FontTag", "")
-            input_font_tag = f"""\newfontfamily\{item_tag}font[
+        if title_font=="default" or title_font=="sourcesanspro":
+            if title_font=="default":
+                file_contents = file_contents.replace(f"{item_tag}FontTag", r"\rm")
+            else:
+                file_contents = file_contents.replace(f"{item_tag}FontTag", r"\sourcesanspro")
+            input_font_tag = f"""\\newfontfamily\{item_tag}font[
   Path=\@fontdir,
   UprightFont=*-Regular,
   {item_tag}FontItalicFont=*-Italic,
@@ -212,14 +223,13 @@ class LatexResume:
         file_contents = file_contents.replace(f"{item_tag}FontColor", fn_font_color)
         file_contents = file_contents.replace(f"{item_tag}FontBold", r'\bfseries' if 'b' in fn_modifiers else "")
         file_contents = file_contents.replace(f"{item_tag}FontItalics", r'\itshape' if 'i' in fn_modifiers else "")
-        
+        file_contents = file_contents.replace(f"{item_tag}FontSC", r'\scshape' if 's' in fn_modifiers else "")
         
         file_contents = file_contents.replace(f"{item_tag}Font", title_font)
         return file_contents
         
         
     def generate(self):
-    
         logging.info('Generating Latex Resume...')
         bar = progressbar.ProgressBar(maxval=len(self.sections)+1,
             widgets=[progressbar.Percentage(), ' ', 
@@ -247,6 +257,33 @@ class LatexResume:
             
             section_style = style_info.pop('section_header', {})
             file_contents = self.set_style( "Section", section_style, file_contents, ['default', 16, 'awesome', ['b']])
+            
+            footer_style = style_info.pop('footer', {})
+            file_contents = self.set_style( "Footer", footer_style, file_contents, ['sourcesanspro', 8, 'lighttext', ['s']])
+            
+            footer_style = style_info.pop('subsection_header', {}) #doesn't do anything
+            file_contents = self.set_style( "Subsection", footer_style, file_contents, ['default', 12, 'text', []])
+            
+            footer_style = style_info.pop('paragraph', {}) #doesn't do anything
+            file_contents = self.set_style( "Paragraph", footer_style, file_contents, ['default', 10, 'text', []])
+            
+            footer_style = style_info.pop('bibliography', {}) 
+            file_contents = self.set_style( "Bib", footer_style, file_contents, ['default', 10, 'graytext', []])
+            
+            footer_style = style_info.pop('entry_title', {})
+            file_contents = self.set_style( "EntryTitle", footer_style, file_contents, ['default', 10, 'darktext', ['b']])
+            
+            footer_style = style_info.pop('entry_position', {})
+            file_contents = self.set_style( "EntryPosition", footer_style, file_contents, ['default', 8, 'graytext', []])
+            
+            footer_style = style_info.pop('entry_date', {}) 
+            file_contents = self.set_style( "EntryDate", footer_style, file_contents, ['default', 8, 'graytext', ['i']])
+            
+            footer_style = style_info.pop('entry_location', {}) 
+            file_contents = self.set_style( "EntryLocation", footer_style, file_contents, ['default', 8, 'darktext', ['s']])
+            
+            footer_style = style_info.pop('skills', {}) 
+            file_contents = self.set_style( "Skillset", footer_style, file_contents, ['default', 9, 'text', ['s']])
             
             f.write(file_contents)
             
@@ -277,6 +314,10 @@ class LatexResume:
         doc.preamble.append(pylatex.NoEscape(r"\makeatother"))
         
         contact_info = {}
+        info_sort = self.resume_format.pop( "header_list", [])
+        if info_sort:
+            contact_info["header_list"] = info_sort
+            
         sites = []
         if self.resume_info.position is not None:
             contact_info['position'] = self.resume_info.position
@@ -307,7 +348,7 @@ class LatexResume:
         #make order an input
         doc.append(pylatex.Command('medskip'))
         doc.append(pylatex.NoEscape("\n"))
-        if self.check_section("Conferences") and self.check_section("Workshops"):
+        if self.check_section("Conferences") and self.check_section("Workshops") and "Conferences and Workshops" in self.sections:
             self.resume_info.all_other_info["Conferences and Workshops"] = self.resume_info.all_other_info.pop("Conferences") + self.resume_info.all_other_info.pop("Workshops") 
             for item in self.resume_info.all_other_info["Conferences and Workshops"]:
                 try:

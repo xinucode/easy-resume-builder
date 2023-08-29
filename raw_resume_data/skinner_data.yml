@@ -1,11 +1,11 @@
 Name: Sarah Skinner
 Position: Graduate Student
-# Objective: Study physics ig.
+Objective: To continue studying important physics questions using lattice QCD.
 Contact:
-    # - email: sarahski@andrew.cmu.edu
+    - email: me@mail.com
     - location: Pittsburgh, PA
-    # - mobile: (417)298-6783
-    # - orcid: 0000-0003-4326-9643
+    - mobile: (123)456-7890
+    - orcid: 0000-0003-4326-9643
     
 Websites:
     - name: Personal Website
@@ -22,7 +22,7 @@ Websites:
       latex_header_id: github
     - name: LinkIn
       image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/linkedin.png
-      link: sarah-s-144b8717a
+      link: "sarah-skinner-916038156"
       latex_header_id: linkedin
     - name: Upwork
       image: https://github.com/xinucode/xinucode.github.io/raw/main/logos/upwork-icon.png
@@ -33,7 +33,7 @@ Education:
       abbreviation: CMU
       dates: Aug 2020 - Aug 2024
       degree: Ph.D. in Physics
-      gpa: 3.8/4.3
+      gpa: 3.9/4.3
       location: Pittsburgh, PA
     - name: Missouri University of Science and Technology
       abbreviation: Missouri S&T
@@ -62,6 +62,7 @@ Publications:
       - PhysRevE.102.032108
       - PhysRevE.100.042142
       - Nicola_2020
+      
 Research Projects:
     - name: Calculating Resonance Information from Lattice QCD
       dates: Jan 2021 - Present
@@ -95,7 +96,7 @@ Research Projects:
       institution: Brookhaven National Laboratories
       summary: Inserted error into dark matter fit model to assess its significance.
       location: Upton, NY
-      advisor: Dr. Anže Slosar
+      advisor: Dr. An\u ze Slosar
     - name: Binary Black Hole Model
       dates: May 2018 - Jul 2018
       institution: Louisiana State University
@@ -110,15 +111,15 @@ Conferences:
     - name: American Physical Society Topical Group on Hadronic Physics Meeting
       date: April 2023
       location: Minneapolis, MI
-    # - name: American Physical Society April Meeting
-      # date: April 2023
-      # location: Minneapolis, MI
     - name: American Physical Society March Meeting
       date: Mar 2019
       location: Boston, MA
-    # - name: Conference for Undergraduate Women in Physics
-      # date: Jan 2019
-      # location: Corpus Christi, TX
+    - name: American Physical Society April Meeting
+      date: April 2023
+      location: Minneapolis, MI
+    - name: Conference for Undergraduate Women in Physics
+      date: Jan 2019
+      location: Corpus Christi, TX
 
 Workshops:
     - name: National Nuclear Physics Summer School
@@ -130,3 +131,8 @@ Workshops:
     - name: International HPC Summer School on Challenges in Computational Sciences
       date: June 2022
       location: Athens, Greece
+      
+Invited Talks:
+    - name: The role of exotic operators in determining the finite-volume spectrum from Lattice QCD and its consequences
+      date: August 18, 2023
+      location: Brookhaven National Laboratories

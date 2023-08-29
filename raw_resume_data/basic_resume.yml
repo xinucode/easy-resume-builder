@@ -1,20 +1,62 @@
 - Latex Resume:
-    style_info:
-      section_header: #sets basic style
-        font: Barrbar #use font name downloaded into "fonts" folder or "default"
-        size: 15 #pt
-        color: black #color of text
-        modifiers: [i,b] #i = italics, b=bold
+    name: skinner_cv
+    # style_info:
+      # skills: #sets basic style
+        # font: default #use font name downloaded into "fonts" folder or "default"
+        # size: 15 #pt
+        # color: green #color of text
+        # modifiers: [i,b] #i = italics, b=bold, s=scshape
       # position_title: #same format as section header
         # ...
       # links: 
         # ...
       # name: 
         # ...
-    header_info: #doesn't work yet (supposed to set the order of the info)
+    header_list: #doesn't work yet (supposed to set the order of the info)
     - homepage
     - email
     - github
     - linkedin
     - gscholar
-- Latex Resume #with all default settings
+    section_list:
+    - Objective
+    - Education
+    - Research Projects
+    - Technical Skills
+    - Computer Skills
+    - Conferences
+    - Workshops
+    # - Conferences and Workshops
+    - Awards and Honors
+    # - Publications
+    - Presentations
+    - Invited Talks
+    - Grants and Scholarships
+    - Licenses and Certifications
+    - Volunteer Services
+    - References
+- Latex Resume:
+    name: skinner_online_resume
+    header_list: #doesn't work yet (supposed to set the order of the info)
+    - homepage
+    # - email
+    - github
+    - linkedin
+    - gscholar
+    section_list:
+    # - Objective
+    - Education
+    - Publications
+    - Research Projects
+    - Technical Skills
+    - Computer Skills
+    # - Conferences
+    # - Workshops
+    - Conferences and Workshops
+    # - Awards and Honors
+    # - Presentations
+    # - Invited Talks
+    # - Grants and Scholarships
+    # - Licenses and Certifications
+    # - Volunteer Services
+    # - References
