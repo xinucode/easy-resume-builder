@@ -1,6 +1,13 @@
 # easy-resume-builder
 A simply resume builder that uses python to take a yaml config file, then converts it to whatever format you like. Formats include latex, html, and rtf. 
 
+Example Doaument:
+<object data="https://xinucode.github.io/posters/Sarah_Skinner_Resume.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="https://xinucode.github.io/posters/Sarah_Skinner_Resume.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="https://xinucode.github.io/posters/Sarah_Skinner_Resume.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 ## To Run
 
 use the command
