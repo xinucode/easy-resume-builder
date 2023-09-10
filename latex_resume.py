@@ -329,7 +329,7 @@ class LatexResume:
     
         #make input
         geometry_options = {"left":"1.4cm", "top":".8cm", "right":"1.4cm", "bottom":"1.8cm", "footskip":".5cm"}
-        doc = pylatex.Document(geometry_options=geometry_options,documentclass=pylatex.NoEscape('awesome-cv'), document_options=["11pt", "a4paper"], fontenc=None, inputenc=None)
+        doc = pylatex.Document(geometry_options=geometry_options,documentclass=pylatex.NoEscape('awesome-cv'), document_options=["11pt", "a4paper"], fontenc=None)
         doc.packages.append(pylatex.Package('hyperref'))
         doc.packages.append(pylatex.Package('lastpage'))
         doc.packages.append(pylatex.Package('tabularx'))
