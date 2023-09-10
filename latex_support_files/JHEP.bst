@@ -80,7 +80,7 @@ INTEGERS { output.state before.all mid.sentence after.quote after.sentence
 
 FUNCTION {bold.if.imauthor}
     { duplicate$ purify$ 
-    "S.~Skinner"
+    "RESUMENAME"
     purify$ = { 
     "\textcolor{black}{\bf "
     swap$ * "}" * } 'skip$ if$

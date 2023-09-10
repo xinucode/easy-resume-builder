@@ -1,6 +1,10 @@
 - Latex Resume:
     name: skinner_cv
-    # style_info:
+    style_info:
+      name:
+        font: data-latin
+      # paragraph:
+        # font: data-latin
       # skills: #sets basic style
         # font: default #use font name downloaded into "fonts" folder or "default"
         # size: 15 #pt
@@ -21,42 +25,19 @@
     section_list:
     - Objective
     - Education
+    - Publications
     - Research Projects
     - Technical Skills
     - Computer Skills
     - Conferences
     - Workshops
     # - Conferences and Workshops
-    - Awards and Honors
-    # - Publications
     - Presentations
     - Invited Talks
-    - Grants and Scholarships
+    # - Grants and Scholarships
+    - Awards and Honors
+    - Clubs and Affiliations
     - Licenses and Certifications
     - Volunteer Services
     - References
-- Latex Resume:
-    name: skinner_online_resume
-    header_list: #doesn't work yet (supposed to set the order of the info)
-    - homepage
-    # - email
-    - github
-    - linkedin
-    - gscholar
-    section_list:
-    # - Objective
-    - Education
-    - Publications
-    - Research Projects
-    - Technical Skills
-    - Computer Skills
-    # - Conferences
-    # - Workshops
-    - Conferences and Workshops
-    # - Awards and Honors
-    # - Presentations
-    # - Invited Talks
-    # - Grants and Scholarships
-    # - Licenses and Certifications
-    # - Volunteer Services
-    # - References
+- Latex Resume

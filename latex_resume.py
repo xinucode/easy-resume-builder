@@ -66,14 +66,10 @@ class HeaderInfo:
                 document.preamble.append(pylatex.Command(item, pylatex.NoEscape(self.info[item]) ))
         
         
-
-def vspace( doc, amount = "-3.5mm"):
-    doc.append(pylatex.Command('vspace',pylatex.NoEscape(amount)))
-    doc.append(pylatex.NoEscape("\n"))
-        
 class LatexResume:
-    sections = ["Objective", "Education", "Publications", "Research Projects", "Technical Skills", "Computer Skills", 
-                "Conferences","Workshops", "Conferences and Workshops", "Invited Talks", "Volunteer Services", "References"]
+    sections = ["Objective", "Education", "Publications", "Research Projects", "Technical Skills", "Computer Skills","Skills", 
+                "Conferences","Workshops", "Conferences and Workshops","Presentations", "Invited Talks","Awards and Honors",
+                "Clubs and Affiliations","Licenses and Certifications", "Volunteer Services", "References", "Other Skills"]
     # sub_dir = "latex_build"
 	
     def __init__( self, resume_info, resume_format, index ):
@@ -118,17 +114,14 @@ class LatexResume:
         
         
     def generate_section( self, section, doc):
-        if section=="Research Projects" or section=="Education" or section=="Conferences":
-            doc.append(pylatex.Command('medskip'))
+        # if section=="Research Projects" or section=="Education" or section=="Conferences":
+            # doc.append(pylatex.Command('medskip'))
         doc.append(pylatex.Command('begin',"cventries"))
         if section=="Objective":
-            # vspace(doc)
             doc.append(pylatex.NoEscape("\n"))
-            doc.append(pylatex.Command('cventry', [pylatex.NoEscape(item) for item in ["\ ",self.resume_info.objective,"\ ","\ ","\ "]]))
-            vspace(doc) #make vspace input
-            # doc.append(pylatex.Command('vspace',pylatex.NoEscape("-3.5mm")))
+            doc.append(pylatex.Command('cventryone', [pylatex.NoEscape(self.resume_info.objective)]))
+            doc.append(pylatex.NoEscape("\n"))
         elif section=="Education":
-            vspace(doc,"1mm")
             doc.append(pylatex.NoEscape("\n"))
             for ed in self.resume_info.education:
                 extra = ""
@@ -138,10 +131,10 @@ class LatexResume:
                     else:
                         extra = ", "+pylatex.utils.italic("Minor in ")
                     extra += pylatex.utils.italic(", ".join(ed.minors))
-                doc.append(pylatex.Command('cventry', [pylatex.NoEscape(ed.degree+extra),str(ed),ed.gpa,ed.dates,pylatex.NoEscape("\ ")]))
-                vspace(doc)
-        elif section=="Computer Skills":
-            # vspace(doc)
+                doc.append(pylatex.Command('cventryfour', [pylatex.NoEscape(ed.degree+extra),str(ed),ed.gpa,ed.dates]))
+                # doc.append(pylatex.NoEscape("\n"))
+            doc.append(pylatex.NoEscape("\n"))
+        elif section in ["Computer Skills","Technical Skills","Skills"]:
             doc.append(pylatex.NoEscape("\n"))
             doc.append(pylatex.NoEscape("\skillsetstyle{"))
             with doc.create(pylatex.Tabularx(5*'X')) as table:
@@ -155,34 +148,68 @@ class LatexResume:
                         group = group+[pylatex.NoEscape("\ ")]*(5-len(group))
                     table.add_row( group )
             doc.append(pylatex.NoEscape("}"))
-            doc.append(pylatex.Command('bigskip'))
+            doc.append(pylatex.NoEscape("\n"))
         elif section=="Publications":
-            # vspace(doc)
             bibfile = self.resume_info.all_other_info[section]['bibfile']
             shutil.copy( bibfile, self.sub_dir )
             for item in self.resume_info.all_other_info[section]['list']:
                 doc.append(pylatex.Command('nocite',pylatex.NoEscape(item)))
-            # doc.append(pylatex.Command('footnotesize'))
             doc.append(pylatex.Command('thisbibstyle',pylatex.Command('bibliography',"publications")))
-            # doc.append()
-            doc.append(pylatex.Command('normalsize'))
+            # doc.append(pylatex.Command('normalsize'))
         elif section=="Research Projects":
             doc.append(pylatex.NoEscape("\n"))
             for res in self.resume_info.research:
-                doc.append(pylatex.Command('cventry', [ pylatex.NoEscape("Advisor: "+pylatex.utils.italic(pylatex.NoEscape(res.advisor))+". "+res.summary),str(res),res.location,res.dates,pylatex.NoEscape("\ ")]))
-                vspace(doc)
-        elif section=="Conferences" or section=="Workshops" or section=="Conferences and Workshops" or section=="Invited Talks":
-            # vspace(doc,"2mm")
+                doc.append(pylatex.Command('cventryfour', [ pylatex.NoEscape("Advisor: "+pylatex.utils.italic(pylatex.NoEscape(res.advisor))+". "+res.summary),str(res),res.location,res.dates]))
+                # doc.append(pylatex.NoEscape("\n"))
+            doc.append(pylatex.NoEscape("\n"))
+        elif section in ["Conferences","Workshops","Conferences and Workshops","Awards and Honors","Licenses and Certifications"]:
+            for item in self.resume_info.all_other_info[section]:
+                try:
+                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%B %Y" )
+                except: 
+                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%b %Y" )
+                    
+            self.resume_info.all_other_info[section].sort( key=date_sort )
+            self.resume_info.all_other_info[section].reverse()
+            
             doc.append(pylatex.NoEscape("\n"))
             for item in self.resume_info.all_other_info[section]:
-                doc.append(pylatex.Command('cventry', ["",item['name'],f"{item['location']}, {item['date']}","",""]))
-                # vspace(doc)
-                doc.append(pylatex.Command('vspace',pylatex.NoEscape("-7mm")))
+                doc.append(pylatex.Command('cventrytwo', [item['name'],f"{item['location']}, {item['date']}"]))
+            doc.append(pylatex.NoEscape("\n"))
+        elif section in ["Presentations","Invited Talks"]:
+            doc.append(pylatex.NoEscape("\n"))
             
-        
+            for item in self.resume_info.all_other_info[section]:
+                try:
+                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%B %d, %Y" )
+                except: 
+                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%b %d, %Y" )
+            self.resume_info.all_other_info[section].sort( key=date_sort )
+            self.resume_info.all_other_info[section].reverse()
+            
+            for item in self.resume_info.all_other_info[section]:
+                doc.append(pylatex.Command('cventryfour', [pylatex.NoEscape(pylatex.utils.italic(item['type'])+": "+item['title']),pylatex.NoEscape(item['host']),item['location'], item['date']]))
+                # doc.append(pylatex.NoEscape("\n"))
+            doc.append(pylatex.NoEscape("\n"))
+            
+        elif section in ["Volunteer Services"]:
+            doc.append(pylatex.NoEscape("\n"))
+            for item in self.resume_info.all_other_info[section]:
+                doc.append(pylatex.Command('cventrytwo', [item['name'],f"{item['location']}, {item['date']}"]))
+            doc.append(pylatex.NoEscape("\n"))
+        elif section=="References":
+            doc.append(pylatex.NoEscape("\n"))
+            for item in self.resume_info.all_other_info[section]:
+                doc.append(pylatex.Command('cventrytwo', [pylatex.NoEscape(item['name']),item['email']]))
+            doc.append(pylatex.NoEscape("\n"))
+        elif section in ["Clubs and Affiliations"]:
+            doc.append(pylatex.NoEscape("\n"))
+            for item in self.resume_info.all_other_info[section]:
+                doc.append(pylatex.Command('cventryfour', [pylatex.NoEscape(item['position']),pylatex.NoEscape(item['name']),item['location'], item['date']]))
+                # doc.append(pylatex.NoEscape("\n"))
+            doc.append(pylatex.NoEscape("\n"))
+            
         doc.append(pylatex.Command('end',"cventries"))
-        # doc.append(pylatex.Command('vspace',pylatex.NoEscape("-3.5mm")))
-        # vspace(doc)
         
     def check_available_fonts( self, file_contents, font_item, font_name):
         fonts = os.listdir( os.path.join(self.sub_dir,"fonts") )
@@ -265,10 +292,10 @@ class LatexResume:
             file_contents = self.set_style( "Subsection", footer_style, file_contents, ['default', 12, 'text', []])
             
             footer_style = style_info.pop('paragraph', {}) #doesn't do anything
-            file_contents = self.set_style( "Paragraph", footer_style, file_contents, ['default', 10, 'text', []])
+            file_contents = self.set_style( "Paragraph", footer_style, file_contents, ['default', 8, 'text', []])
             
             footer_style = style_info.pop('bibliography', {}) 
-            file_contents = self.set_style( "Bib", footer_style, file_contents, ['default', 10, 'graytext', []])
+            file_contents = self.set_style( "Bib", footer_style, file_contents, ['default', 8, 'graytext', []])
             
             footer_style = style_info.pop('entry_title', {})
             file_contents = self.set_style( "EntryTitle", footer_style, file_contents, ['default', 10, 'darktext', ['b']])
@@ -287,15 +314,27 @@ class LatexResume:
             
             f.write(file_contents)
             
+        #make modifications to JHEP.bst
+        with open( os.path.join(self.sub_dir, "JHEP.bst"), "r") as f:
+            file_contents = f.read()
+            
+        with open( os.path.join(self.sub_dir, "JHEP.bst"), "w") as f:
+            name = self.resume_info.name.split(" ")
+            last_name = name[-1]
+            first_init = name[0][0]
+            author_name = f"{first_init}.~{last_name}"
+            file_contents = file_contents.replace("RESUMENAME",author_name)
+            f.write(file_contents)
             
     
         #make input
         geometry_options = {"left":"1.4cm", "top":".8cm", "right":"1.4cm", "bottom":"1.8cm", "footskip":".5cm"}
-        doc = pylatex.Document(geometry_options=geometry_options,documentclass=pylatex.NoEscape('awesome-cv'), document_options=["11pt", "a4paper"])
+        doc = pylatex.Document(geometry_options=geometry_options,documentclass=pylatex.NoEscape('awesome-cv'), document_options=["11pt", "a4paper"], fontenc=None, inputenc=None)
         doc.packages.append(pylatex.Package('hyperref'))
         doc.packages.append(pylatex.Package('lastpage'))
         doc.packages.append(pylatex.Package('tabularx'))
-        doc.packages.append(pylatex.Package('etoolbox')) 
+        # doc.packages.append(pylatex.Package('amssymb'))
+        doc.packages.append(pylatex.Package('etoolbox'))
         doc.packages.append(pylatex.Package('graphicx,calc'))
         doc.preamble.append(pylatex.Command('definecolor', ['link', 'RGB','28,74,238']))
         doc.preamble.append(pylatex.Command('bibliographystyle', "JHEP")) #make input
@@ -350,13 +389,6 @@ class LatexResume:
         doc.append(pylatex.NoEscape("\n"))
         if self.check_section("Conferences") and self.check_section("Workshops") and "Conferences and Workshops" in self.sections:
             self.resume_info.all_other_info["Conferences and Workshops"] = self.resume_info.all_other_info.pop("Conferences") + self.resume_info.all_other_info.pop("Workshops") 
-            for item in self.resume_info.all_other_info["Conferences and Workshops"]:
-                try:
-                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%B %Y" )
-                except: 
-                    item["date_obj"] = datetime.datetime.strptime( item["date"], "%b %Y" )
-            self.resume_info.all_other_info["Conferences and Workshops"].sort( key=date_sort )
-            self.resume_info.all_other_info["Conferences and Workshops"].reverse()
         
         bar.update(i)
         i+=1
@@ -372,8 +404,9 @@ class LatexResume:
        
         doc.generate_pdf(os.path.join(self.sub_dir,self.out_file_name), clean_tex=False, clean=False, compiler="lualatex", compiler_args=['-synctex=1', '-interaction=nonstopmode'], silent=True)
         bar.finish()
-        logging.info('Running Bibtex...')
-        os.system( f"bibtex -include-directory={self.sub_dir} {os.path.join(self.sub_dir,self.out_file_name)}" )
+        if "Publications" in self.sections:
+            logging.info('Running Bibtex...')
+            os.system( f"bibtex -include-directory={self.sub_dir} {os.path.join(self.sub_dir,self.out_file_name)}" )
         logging.info('Generating PDF...')
         doc.generate_pdf(os.path.join(self.sub_dir,self.out_file_name), clean_tex=False, clean=True, compiler="lualatex", compiler_args=['-synctex=1', '-interaction=nonstopmode'], silent=True)
         

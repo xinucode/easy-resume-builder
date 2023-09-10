@@ -41,14 +41,16 @@ Education: #optional
       - Mathematics
       location: Rolla, MO
 	...
-Computer Skills: #optional
+Computer Skills: #optional, and/or "Technical Skills", "Skills", "Other Skills"
     - Python
     - LaTeX
     ...
 Publications: #optional
-    - BULAVA2023116105
-    - PhysRevE.102.032108
-    ...
+    bibfile: path/to/bib #optional, default is "raw_resume_data/publications.bib"
+	list: #list items must be entries provided in bibfile
+	  - BULAVA2023116105
+	  - PhysRevE.102.032108
+	  ...
 Research Projects: #optional
     - name: Calculating Resonance Information from Lattice QCD
       dates: Jan 2021 - Present
@@ -59,17 +61,36 @@ Research Projects: #optional
       advisor: Dr. Colin Morningstar
 	...
       
-Conferences: #optional
+Conferences: #optional, and/or "Workshops", "Awards and Honors", "Licenses and Certifications", "Volunteer Services"
     - name: American Physical Society Topical Group on Hadronic Physics Meeting
       date: April 2023
       location: Minneapolis, MI
     ...
 
-Workshops: #optional
-    - name: Hampton University Graduate Studies (HUGS) Program (Jefferson Lab)
-      date: June 2022
-      location: Newport News, VA
+Invited Talks: #optional, and/or "Presentations"
+    - title: The role of exotic operators in determining the finite-volume spectrum from Lattice QCD and its consequences (Michael Creutz said I did a ``good job.")
+      host: Brookhaven National Laboratories 
+      date: August 18, 2023
+      location: Upton, NY
+      type: Seminar
     ...
+	
+Clubs and Affiliations: #optional
+    - name: Society of Physics Students
+      position: President
+      date: Aug 2017-May 2018
+      location: Missouri S&T
+	...
+	
+References:
+    - name: Dr. Colin Morningstar
+      email: cmorning@andrew.cmu.edu
+    - name: Dr. John Bulava
+      email: john.bulava@ruhr-uni-bochum.de
+    - name: Dr. Andr\'e Walker-Loud
+      email: walkloud@lbl.gov
+	...
+	
 ```
 
 ## Resume Format Config
@@ -103,7 +124,7 @@ Example #2:
     - gscholar
     section_list: #optional, specifies which items to include in section list
 					# and in what order (if no info for section is given, then 
-					# it's not included
+					# it's not included)
     - Objective
     - Education
     - Publications

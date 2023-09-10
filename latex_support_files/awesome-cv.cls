@@ -170,6 +170,8 @@
 % Set the FontAwesome font to be up-to-date.
 %这里被我修改了\newfontfamily\FA[Path=\@fontdir]{FontAwesome}
 % Set font for header (default is Roboto)
+
+
 \newfontfamily\Namefont[
   Path=\@fontdir,
   UprightFont=*-Regular,
@@ -276,7 +278,7 @@
 
 
 \newcommand*{\footerfont}{\sourcesanspro}%
-\newcommand*{\bodyfont}{\rm}%\sourcesanspro
+\newcommand*{\bodyfont}{\cm}%\sourcesanspro
 \newcommand*{\bodyfontlight}{\rm}%\sourcesansprolght
 
 %-------------------------------------------------------------------------------
@@ -697,20 +699,38 @@
  % \end{center}
 }
 % Define an entry of cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
-\newcommand*{\cventry}[5]{%
- \vspace{-3.5mm}  
+\newcommand*{\cventryone}[1]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \paragraphstyle{#1}
+}
+% Usage: \cventry4{<position>}{<title>}{<location>}{<date>}{<description>}
+\newcommand*{\cventrytwo}[2]{%
+ %\vspace{-3.5mm}  
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#1#3#4}
-      {\entrytitlestyle{#2}\setlength{\leftmargin}{-20em} \noindent\\
-        \multicolumn{1}{L{\textwidth}}{\descriptionstyle{#5}}}
-      {\ifempty{#2#3}
-          {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-          {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-            \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-        \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
+	\entrytitlestyle{#1} & \entrydatestyle{#2}
+  \end{tabular*}%  
+}
+% Usage: \cventry4{<position>}{<title>}{<location>}{<date>}{<description>}
+\newcommand*{\cventryfour}[4]{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+	\entrypositionstyle{#1} & \entrydatestyle{#4}
+  \end{tabular*}%  
+}
+% Usage: \cventry5{<position>}{<title>}{<location>}{<date>}{<description>}
+\newcommand*{\cventryfive}[5]{%
+ %\vspace{-3.5mm}  
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+	\entrypositionstyle{#1} & \entrydatestyle{#4} \\
+	\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%  
 }
 
